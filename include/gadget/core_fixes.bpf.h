@@ -353,19 +353,4 @@ gadget_get_syscall_arg(struct pt_regs *regs, unsigned int arg_id)
 	return 0;
 }
 
-/**
- * struct open_how is associated with openat2() which was introduced in:
- * fddb5d430ad9 ("open: introduce openat2(2) syscall")
- * which makes its debut in kernel 5.6.
- */
-struct open_how___x {
-	__u64 flags;
-	__u64 mode;
-} __attribute__((preserve_access_index));
-
-static __always_inline bool has_open_how()
-{
-	return !!bpf_core_type_exists(struct open_how___x);
-}
-
 #endif /* __CORE_FIXES_BPF_H */

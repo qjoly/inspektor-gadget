@@ -90,9 +90,6 @@ int ig_openat_e(struct syscall_trace_enter *ctx)
 SEC("tracepoint/syscalls/sys_enter_openat2")
 int ig_openat2_e(struct syscall_trace_enter *ctx)
 {
-	if (!has_open_how())
-		return 0;
-
 	struct open_how how = {};
 
 	if (bpf_probe_read_user(&how, sizeof(how), (void *)ctx->args[2]))
